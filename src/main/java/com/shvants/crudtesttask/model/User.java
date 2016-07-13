@@ -1,9 +1,4 @@
-package main.java.com.shvants.crudtesttask.model;
-
-import javafx.scene.input.DataFormat;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+package com.shvants.crudtesttask.model;
 import java.util.Date;
 
 /**
@@ -17,11 +12,45 @@ public class User {
     private boolean isAdmin;
     private Date createdDate;
 
-    public User(String name, int age, boolean isAdmin) {
-        this.id = currentId++;
+    public User() {}
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
         this.age = age;
-        this.isAdmin = isAdmin;
-        this.createdDate = new Date();
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 }
