@@ -5,7 +5,7 @@ import java.util.Date;
  * Created by Shvantc.ao on 12.07.2016.
  */
 public class User {
-    private int currentId = 0;
+
     private int id ;
     private String name;
     private int age;
