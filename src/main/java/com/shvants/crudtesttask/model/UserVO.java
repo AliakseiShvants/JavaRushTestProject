@@ -4,7 +4,7 @@ import java.util.Date;
 /**
  * Created by Shvantc.ao on 12.07.2016.
  */
-public class User {
+public class UserVO {
 
     private int id ;
     private String name;
@@ -12,7 +12,7 @@ public class User {
     private boolean isAdmin;
     private Date createdDate;
 
-    public User() {}
+    public UserVO() {}
 
     public int getId() {
         return id;
@@ -52,5 +52,10 @@ public class User {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    @Override
+    public String toString() {
+        return "".concat("UserVO [id=").concat(String.valueOf(getId())).concat(", name=").concat(getName()).concat(", age=").concat(String.valueOf(getAge())).concat(", is admin=").concat(isAdmin() ? "yes" : "no").concat(String.valueOf(getCreatedDate())).concat("]");
     }
 }
