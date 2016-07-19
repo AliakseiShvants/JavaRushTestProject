@@ -17,9 +17,9 @@ public class UserController {
     @Autowired
     UserManager manager;
 
-    @RequestMapping(value = "userList", method = RequestMethod.GET)
+    @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
     public String getUsers( Model model){
-        model.addAttribute("user", manager.getUsers());
+        model.addAttribute("userList", manager.getUsers());
         return "userListDisplay";
     }
 }

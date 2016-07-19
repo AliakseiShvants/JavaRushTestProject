@@ -1,6 +1,7 @@
 package com.shvants.crudtesttask.dao;
 
 import com.shvants.crudtesttask.model.UserVO;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.List;
 /**
  * Created by Shvantc.ao on 13.07.2016.
  */
+@Repository
 public class UserDAOImpl implements UserDAO {
 
     private List<UserVO> createUser(){

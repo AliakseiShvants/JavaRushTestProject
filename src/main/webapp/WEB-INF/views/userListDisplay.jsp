@@ -20,12 +20,12 @@
         <th  width=18%>Дата создания записи</th>
     </tr>
 
-    <c:forEach items="${getUsers}" var="user">
+    <c:forEach items="${userList}" var="user">
     <tr>
-        <td>${user.getName()}</td>
-        <td>${user.getAge()}</td>
-        <td>${user.isAdmin()}</td>
-        <td>${user.getCreatedDate()}</td>
+        <td>${user.name}</td>
+        <td>${user.age}</td>
+        <td>${user.admin}</td>
+        <td>${user.createdDate}</td>
     </tr>
     </c:forEach>
 </table>
