@@ -3,21 +3,22 @@
 
 <html>
 <head>
+    <meta charset="utf-8">
     <title> Spring MVC CrudTestTask </title>
    </head>
 
 <body bgcolor=white>
 
-<table  align=center  width=66% border=1>
+<table  align=center  width=72% border=1>
     <caption align=top>
-        <h1>Our users</h1>
+        <h1>Наши пользователи</h1>
     </caption>
 
     <tr>
-        <th  width=32%>user name</th>
-        <th  width=8%>age</th>
-        <th  width=8%>is admin?</th>
-        <th  width=18%>date of create</th>
+        <th  >Фамилия пользователя</th>
+        <th  >Возраст</th>
+        <th  >Является ли администратором</th>                             
+        <th  >Дата создания учетной записи</th>
     </tr>
 
     <c:forEach items="${userList}" var="user">
@@ -26,17 +27,19 @@
         <td>${user.age}</td>
         <td>${user.admin}</td>
         <td>${user.createdDate}</td>
+        <td><button>Править</button></td>
+        <td><button>Удалить</button></td>
     </tr>
     </c:forEach>
 </table>
 
     <form align=center>
-        <table align=center width=66% border=1>
+        <table align=center width=72% border=1>
             <tr>
-                <td  width=36%><input type="text"></td>
-                <td  width=8%><input type="text"></td>
-                <td  width=8%><input type="text"></td>
-                <td  width=18%><input type="submit" value="new user"></td>
+                <td width=6%><input type="text" value="Фамилия"></td>
+                <td width=6%><input type="text" value="Возраст"></td>
+                <td width=6%><input type="text" value="админ?"></td>
+                <td width=36%><input type="submit" value="new user"></td>
             </tr>
         </table>
     </form>
