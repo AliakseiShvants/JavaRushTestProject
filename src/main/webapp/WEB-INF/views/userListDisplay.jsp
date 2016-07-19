@@ -10,14 +10,14 @@
 
 <table  align=center  width=66% border=1>
     <caption align=top>
-        <h1>Наши юзеры</h1>
+        <h1>Our users</h1>
     </caption>
 
     <tr>
-        <th  width=32%>Имя юзера</th>
-        <th  width=8%>Возраст</th>
-        <th  width=8%>Админ?</th>
-        <th  width=18%>Дата создания записи</th>
+        <th  width=32%>user name</th>
+        <th  width=8%>age</th>
+        <th  width=8%>is admin?</th>
+        <th  width=18%>date of create</th>
     </tr>
 
     <c:forEach items="${userList}" var="user">
@@ -36,7 +36,7 @@
                 <td  width=36%><input type="text"></td>
                 <td  width=8%><input type="text"></td>
                 <td  width=8%><input type="text"></td>
-                <td  width=18%><input type="submit" value="Новый user"></td>
+                <td  width=18%><input type="submit" value="new user"></td>
             </tr>
         </table>
     </form>
