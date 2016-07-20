@@ -1,11 +1,14 @@
 package com.shvants.crudtesttask.controller;
 
+import com.shvants.crudtesttask.dao.UserDAOImpl;
+import com.shvants.crudtesttask.model.UserVO;
 import com.shvants.crudtesttask.service.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Shvantc.ao on 12.07.2016.
@@ -21,5 +24,21 @@ public class UserController {
     public String getUsers( Model model){
         model.addAttribute("userList", manager.getUsers());
         return "userListDisplay";
+    }
+
+    @RequestMapping(value = "/addNewUser", method = RequestMethod.POST)
+    @ResponseBody
+    public String addNewUser(HttpServletRequest request,
+           @RequestParam(value = "txtName", required = true) String name,
+           @RequestParam(value = "txtAge", required = true) String age,
+           @RequestParam(value = "txtAdmin", required = true) String admin){
+
+        UserVO userVO = new UserVO();
+        userVO.setName(name);
+        userVO.setAge(Integer.parseInt(age));
+        userVO.setAdmin(Boolean.valueOf(admin));
+        
+
+        return "addNewUserSuccess";
     }
 }

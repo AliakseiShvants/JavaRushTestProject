@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -9,40 +10,44 @@
 
 <body bgcolor=white>
 
-<table  align=center  width=72% border=1>
+<table  align=center  width=60% border=2>
     <caption align=top>
         <h1>Наши пользователи</h1>
     </caption>
 
     <tr>
-        <th  >Фамилия пользователя</th>
-        <th  >Возраст</th>
-        <th  >Является ли администратором</th>                             
-        <th  >Дата создания учетной записи</th>
+        <th width=25% align=center>Фамилия и имя пользователя</th>
+        <th width=5% align=center>Возраст</th>
+        <th width=5 align=center>Является ли администратором</th>
+        <th width=15% align=center>Дата создания учетной записи</th>
     </tr>
 
     <c:forEach items="${userList}" var="user">
     <tr>
-        <td>${user.name}</td>
-        <td>${user.age}</td>
-        <td>${user.admin}</td>
-        <td>${user.createdDate}</td>
-        <td><button>Править</button></td>
-        <td><button>Удалить</button></td>
+        <td width=25% >${user.name}</td>
+        <td width=5% align=center>${user.age}</td>
+        <td width=5% align=center width=>${user.admin}</td>
+        <td width=15% align=center>${user.createdDate}</td>
+            <form>
+        <td width=5%><button>Править</button></td>
+        <td width=5%><button>Удалить</button></td>
+            </form>
     </tr>
     </c:forEach>
 </table>
 
-    <form align=center>
-        <table align=center width=72% border=1>
-            <tr>
-                <td width=6%><input type="text" value="Фамилия"></td>
-                <td width=6%><input type="text" value="Возраст"></td>
-                <td width=6%><input type="text" value="админ?"></td>
-                <td width=36%><input type="submit" value="new user"></td>
-            </tr>
+      <table align=center width=30% border=2>
+        <form method="post" action="http://localhost:8080/crudtesttask/user-module/addNewUser" align=center>
+        <tr>
+            <td ><input type="text" value="Фамилия и имя"></td>
+            <td><input type="text" value="Возраст"></td>
+            <td><input type="text" value="Админ?"></td>
+            <td width=4%><input type="submit" value="Новый пользователь"></td>
+        </form>
+
+        </tr>
         </table>
-    </form>
+
 
 </body>
 </html>
