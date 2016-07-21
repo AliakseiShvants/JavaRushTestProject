@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ page pageEncoding="UTF-8"%>
 
 <html>
 <head>
@@ -37,11 +36,15 @@
 </table>
 
       <table align=center width=30% border=2>
-        <form method="post" action="/user-module/addNewUser" align=center>
+        <form method="post" action="http://localhost:8080/crudtesttask/user-module/addNewUser" align=center>
         <tr>
-            <td ><input type="text" name="name" value="Фамилия и имя"></td>
-            <td><input type="text" name="age" value="Возраст"></td>
-            <td><input type="text" name="admin" value="Админ?"></td>
+            <td ><input type="text" name="name" ></td>
+            <td><input type="text" name="age" ></td>
+            <td><input type="text" name="admin" list="boolean"></td>
+            <datalist id="boolean">
+                           <option value="true">
+                           <option value="false">
+            </datalist>
             <td width=4%><input type="submit" value="Новый пользователь"></td>
         </form>
         </tr>
