@@ -29,9 +29,12 @@ public class UserController {
     @RequestMapping(value = "/addNewUser", method = RequestMethod.POST)
     @ResponseBody
     public String addNewUser(HttpServletRequest request,
-           @RequestParam(value = "txtName", required = true) String name,
-           @RequestParam(value = "txtAge", required = true) String age,
-           @RequestParam(value = "txtAdmin", required = true) String admin){
+           @RequestParam(value = "name", required = true) String name,
+           @RequestParam(value = "age", required = true) String age,
+           @RequestParam(value = "admin", required = true) String admin){
+
+        if (name == null || age == null || admin == null)
+            throw new NullPointerException();
 
         UserVO userVO = new UserVO();
         userVO.setName(name);

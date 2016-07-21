@@ -6,7 +6,7 @@
 
    <body>
    <h1> Новый пользователь успешно добавлен!<h1>
-   <a href="http://localhost:8080/crudtesttask/user-module/getUsers">
+   <a href="/user-module/getUsers">
     <h2>Вернуться к списку пользователей</h2>
    </a>
    </body>
