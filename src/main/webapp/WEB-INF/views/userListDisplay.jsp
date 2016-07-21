@@ -27,10 +27,16 @@
         <td width=5% align=center>${user.age}</td>
         <td width=5% align=center width=>${user.admin}</td>
         <td width=15% align=center>${user.createdDate}</td>
+        <td width=5%>
             <form>
-        <td width=5%><button>Править</button></td>
-        <td width=5%><button>Удалить</button></td>
+                <button >Править</button>
             </form>
+        </td>
+        <td width=5%>
+            <form method="post" action="http://localhost:8080/crudtesttask/user-module/deleteUser" id="delete">
+                <button type="submit" form="delete">Удалить</button>
+            </form>
+        </td>
     </tr>
     </c:forEach>
 </table>

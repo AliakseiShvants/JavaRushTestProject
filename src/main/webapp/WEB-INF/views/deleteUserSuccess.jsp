@@ -7,7 +7,7 @@
    </head>
 
    <body>
-   <h1> ${message}<h1>
+   <h1> Пользователь успешно удален!<h1>
    <a href="http://localhost:8080/crudtesttask/user-module/getUsers">
     <h2>Вернуться к списку пользователей</h2>
    </a>

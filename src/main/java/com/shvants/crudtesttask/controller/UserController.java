@@ -27,7 +27,6 @@ public class UserController {
     }
 
     @RequestMapping(value = "/addNewUser", method = RequestMethod.POST)
-    @ResponseBody
     public ModelAndView addNewUser(HttpServletRequest request,
                                    @RequestParam(value = "name", required = true) String name,
                                    @RequestParam(value = "age", required = true) String age,
@@ -41,8 +40,14 @@ public class UserController {
         userVO.setAge(Integer.parseInt(age));
         userVO.setAdmin(Boolean.valueOf(admin));
 
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("addNewUserSuccess");
+        ModelAndView mav = new ModelAndView("addNewUserSuccess", "message", "Новый пользователь успешно добавлен!");
+
         return mav;
     }
+
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+    public String deleteUser(){
+        return "deleteUserSuccess";
+    }
+
 }
