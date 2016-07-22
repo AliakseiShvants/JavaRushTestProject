@@ -40,14 +40,15 @@ public class UserController {
         userVO.setAge(Integer.parseInt(age));
         userVO.setAdmin(Boolean.valueOf(admin));
 
-        ModelAndView mav = new ModelAndView("addNewUserSuccess", "message", "Новый пользователь успешно добавлен!");
-
+        ModelAndView mav = new ModelAndView("successAction", "message", "Новый пользователь успешно добавлен!");
         return mav;
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
-    public String deleteUser(){
-        return "deleteUserSuccess";
+    public ModelAndView deleteUser(/*int id*/){
+
+        ModelAndView mav = new ModelAndView("successAction", "message", "Пользователь c id=" + /*id +*/" успешно удален!");
+        return mav;
     }
 
 }

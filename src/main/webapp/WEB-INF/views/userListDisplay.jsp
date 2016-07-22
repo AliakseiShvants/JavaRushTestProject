@@ -5,17 +5,25 @@
 <head>
     <meta charset="utf-8">
     <title> Spring MVC CrudTestTask </title>
+
+    <script >
+    function booleanInput(boolean){
+    if (boolean === "true") {return "да";}
+    else {return "нет";}
+    }
+    </script>
+
    </head>
 
 <body bgcolor=white>
 
-<table  align=center  width=60% border=2>
+<table  align=center width=44%  border=2>
     <caption align=top>
         <h1>Наши пользователи</h1>
     </caption>
 
     <tr>
-        <th width=25% align=center>Фамилия и имя пользователя</th>
+        <th width=15% align=center>Фамилия и имя пользователя</th>
         <th width=5% align=center>Возраст</th>
         <th width=5 align=center>Является ли администратором</th>
         <th width=15% align=center>Дата создания учетной записи</th>
@@ -23,18 +31,18 @@
 
     <c:forEach items="${userList}" var="user">
     <tr>
-        <td width=25% >${user.name}</td>
+        <td width=15% >${user.name}</td>
         <td width=5% align=center>${user.age}</td>
-        <td width=5% align=center width=>${user.admin}</td>
+        <td width=5% align=center >booleanInput(${user.admin})</td>
         <td width=15% align=center>${user.createdDate}</td>
-        <td width=5%>
+        <td width=1% height=1%>
             <form>
-                <button >Править</button>
+                <button type="submit" >Править</button>
             </form>
         </td>
-        <td width=5%>
-            <form method="post" action="http://localhost:8080/crudtesttask/user-module/deleteUser" id="delete">
-                <button type="submit" form="delete">Удалить</button>
+        <td width=1% height=1%>
+            <form method="post" action="http://localhost:8080/crudtesttask/user-module/deleteUser" id="${user.id}">
+                <button type="submit" >Удалить</button>
             </form>
         </td>
     </tr>
