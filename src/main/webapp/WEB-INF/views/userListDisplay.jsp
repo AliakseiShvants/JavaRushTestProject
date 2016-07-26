@@ -41,7 +41,8 @@
             </form>
         </td>
         <td width=1% height=1%>
-            <form method="post" action="http://localhost:8080/crudtesttask/user-module/deleteUser" id="${user.id}">
+            <form method="post" action="http://localhost:8080/crudtesttask/user-module/deleteUser">
+            <input type="hidden" name="id" value="${user.id}">
                 <button type="submit" >Удалить</button>
             </form>
         </td>

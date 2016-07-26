@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Shvantc.ao on 12.07.2016.
@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/addNewUser", method = RequestMethod.POST)
-    public ModelAndView addNewUser(HttpServletRequest request,
+    public ModelAndView addNewUser(/*HttpServletRequest request,*/
                                    @RequestParam(value = "name", required = true) String name,
                                    @RequestParam(value = "age", required = true) String age,
                                    @RequestParam(value = "admin", required = true) String admin){
@@ -45,9 +45,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
-    public ModelAndView deleteUser(/*int id*/){
+    public ModelAndView deleteUser(@RequestParam String id){
 
-        ModelAndView mav = new ModelAndView("successAction", "message", "Пользователь c id=" + /*id +*/" успешно удален!");
+        ModelAndView mav = new ModelAndView("successAction", "message", "Пользователь c id=" + id + " успешно удален!");
         return mav;
     }
 
