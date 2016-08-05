@@ -1,0 +1,31 @@
+package com.shvants.crudtesttask.service;
+
+import com.shvants.crudtesttask.dao.UserDAO;
+import com.shvants.crudtesttask.dao.UserDAOServiceImpl;
+import com.shvants.crudtesttask.model.User;
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+
+/**
+ * Created by aliaksei on 14.7.16.
+ */
+public class UserServiceTest {
+   //@Ignore
+   //@Test
+//    public void testGetUser(){
+//
+//        UserDAOServiceImpl testUserService = new UserDAOServiceImpl();
+//
+//        int count = testUserService.getAllUsers().size();
+//        Assert.assertEquals(count, 5);
+//
+//        for (UserDAO user : testUserService.getAllUsers(){
+//            Assert.assertNotNull(user.getId());
+//            Assert.assertNotNull(user.getName());
+//            Assert.assertNotNull(user.getAge());
+//            Assert.assertNotNull(user.isAdmin());
+//            Assert.assertNotNull(user.getCreatedDate());
+//        }
+//    }
+}

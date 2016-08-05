@@ -1,10 +1,13 @@
 package com.shvants.crudtesttask.model;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by Shvantc.ao on 12.07.2016.
  */
-public class UserVO {
+@Entity
+@Table(name  = "User")
+public class User {
 
     private int id ;
     private String name;
@@ -12,7 +15,8 @@ public class UserVO {
     private boolean isAdmin;
     private Date createdDate;
 
-    public UserVO() {}
+    public User() {}
+
 
     public int getId() {
         return id;
@@ -56,6 +60,6 @@ public class UserVO {
 
     @Override
     public String toString() {
-        return "".concat("UserVO [id=").concat(String.valueOf(getId())).concat(", name=").concat(getName()).concat(", age=").concat(String.valueOf(getAge())).concat(", is admin=").concat(isAdmin() ? "yes" : "no").concat(String.valueOf(getCreatedDate())).concat("]");
+        return "".concat("User [id=").concat(String.valueOf(getId())).concat(", name=").concat(getName()).concat(", age=").concat(String.valueOf(getAge())).concat(", is admin=").concat(isAdmin() ? "yes" : "no").concat(String.valueOf(getCreatedDate())).concat("]");
     }
 }
