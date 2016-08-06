@@ -2,11 +2,6 @@ package com.shvants.crudtesttask.model;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by Shvantc.ao on 12.07.2016.
- */
-@Entity
-@Table(name  = "User")
 public class User {
 
     private int id ;

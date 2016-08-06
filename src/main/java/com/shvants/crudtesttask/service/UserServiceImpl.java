@@ -8,16 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Shvantc.ao on 18.07.2016.
- */
 @Service("userService")
-//@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDAOService userDAOService;
-
 
     public List<User> getAllUsers() {
 
@@ -25,14 +20,36 @@ public class UserServiceImpl implements UserService {
         List<UserDAO> userDaoList = userDAOService.getAllUsers();
 
         for(UserDAO userDAO : userDaoList){
-            User user = new User();
-            user.setId(userDAO.getId());
-            user.setName(userDAO.getName());
-            user.setAge(userDAO.getAge());
-            user.setAdmin(userDAO.isAdmin());
-            user.setCreatedDate(userDAO.getCreatedDate());
+            User user = transformUserDAOtoUser(userDAO);
             result.add(user);
         }
         return result;
+    }
+
+    private User transformUserDAOtoUser(UserDAO userDAO) {
+        User user = new User();
+        user.setId(userDAO.getId());
+        user.setName(userDAO.getName());
+        user.setAge(userDAO.getAge());
+        user.setAdmin(userDAO.isAdmin());
+        user.setCreatedDate(userDAO.getCreatedDate());
+        return user;
+    }
+    private UserDAO transformUserToUserDAO(User user) {
+        UserDAO userDAO = new UserDAO();
+        userDAO.setId(user.getId());
+        userDAO.setName(user.getName());
+        userDAO.setAge(user.getAge());
+        userDAO.setAdmin(user.isAdmin());
+        userDAO.setCreatedDate(user.getCreatedDate());
+        return userDAO;
+    }
+
+    public void add(User user) {
+        userDAOService.addUser(transformUserToUserDAO(user));
+    }
+
+    public void delete(int id) {
+        userDAOService.removeUser(id);
     }
 }

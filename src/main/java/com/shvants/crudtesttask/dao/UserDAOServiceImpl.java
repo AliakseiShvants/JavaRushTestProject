@@ -1,12 +1,12 @@
 package com.shvants.crudtesttask.dao;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Service
+@Repository
 public class UserDAOServiceImpl implements UserDAOService{
 
 
@@ -56,26 +56,25 @@ public class UserDAOServiceImpl implements UserDAOService{
 //
 //        return createdList;
 //    }
+    @PersistenceContext
+    private EntityManager em;
 
-    public EntityManager em = Persistence.createEntityManagerFactory("BUSYA").createEntityManager();
-
+    @Transactional
     public void addUser(UserDAO userDAO) {
-
+        em.persist(userDAO);
     }
 
     public void updateUser(UserDAO userDAO) {
 
     }
-
+    @Transactional
     public void removeUser(int id) {
-
+        UserDAO userDAO = em.find(UserDAO.class, id);
+        if (userDAO != null)
+            em.remove(userDAO);
     }
 
     public List<UserDAO> getAllUsers() {
-        em.getTransaction().begin();
-        List<UserDAO> result= em.createQuery("from User", UserDAO.class).getResultList();
-        em.getTransaction().commit();
-        em.close();
-        return result;
+        return em.createQuery("from UserDAO", UserDAO.class).getResultList();
     }
 }

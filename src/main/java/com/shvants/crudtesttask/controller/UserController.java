@@ -23,10 +23,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
     public String getUsers( Model model){
-        model.addAttribute("user", new User());
-        model.addAttribute("users", userService.getAllUsers());
+        //model.addAttribute("user", new User());
+        model.addAttribute("userList", userService.getAllUsers());
 
         return "userListDisplay";
     }
@@ -45,13 +45,15 @@ public class UserController {
         user.setAge(Integer.parseInt(age));
         user.setAdmin(Boolean.valueOf(admin));
 
+        userService.add(user);
+
         ModelAndView mav = new ModelAndView("successAction", "message", "Новый пользователь успешно добавлен!");
         return mav;
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
     public ModelAndView deleteUser(@RequestParam String id){
-
+        userService.delete(Integer.parseInt(id));
         ModelAndView mav = new ModelAndView("successAction", "message", "Пользователь c id=" + id + " успешно удален!");
         return mav;
     }
