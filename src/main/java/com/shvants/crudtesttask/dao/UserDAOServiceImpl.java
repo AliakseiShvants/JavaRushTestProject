@@ -69,12 +69,14 @@ public class UserDAOServiceImpl implements UserDAOService{
     }
     @Transactional
     public void removeUser(int id) {
-        UserDAO userDAO = em.find(UserDAO.class, id);
-        if (userDAO != null)
-            em.remove(userDAO);
+       em.remove(findUser(id));
     }
 
     public List<UserDAO> getAllUsers() {
         return em.createQuery("from UserDAO", UserDAO.class).getResultList();
+    }
+
+    public UserDAO findUser(int id) {
+        return em.find(UserDAO.class, id);
     }
 }

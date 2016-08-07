@@ -1,5 +1,6 @@
 package com.shvants.crudtesttask.controller;
 
+import com.shvants.crudtesttask.exception.UserNotFoundException;
 import com.shvants.crudtesttask.model.User;
 import com.shvants.crudtesttask.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,7 @@ import java.util.List;
 
 //import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by Shvantc.ao on 12.07.2016.
- */
+
 @Controller
 @RequestMapping("/user-module")
 public class UserController {
@@ -47,15 +46,18 @@ public class UserController {
 
         userService.add(user);
 
-        ModelAndView mav = new ModelAndView("successAction", "message", "Новый пользователь успешно добавлен!");
-        return mav;
+        return new ModelAndView("successAction", "message", "Новый пользователь успешно добавлен!");
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
     public ModelAndView deleteUser(@RequestParam String id){
-        userService.delete(Integer.parseInt(id));
-        ModelAndView mav = new ModelAndView("successAction", "message", "Пользователь c id=" + id + " успешно удален!");
-        return mav;
+        try {
+            userService.delete(Integer.parseInt(id));
+            return new ModelAndView("successAction", "message", "Пользователь c id=" + id + " успешно удален!");
+        }
+        catch (UserNotFoundException e) {
+            return new ModelAndView("successAction", "message", ":( Не в наших силах удалить этого пользователя! Такого id просто не существует!");
+        }
     }
 
 }

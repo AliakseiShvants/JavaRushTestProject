@@ -2,6 +2,7 @@ package com.shvants.crudtesttask.service;
 
 import com.shvants.crudtesttask.dao.UserDAO;
 import com.shvants.crudtesttask.dao.UserDAOService;
+import com.shvants.crudtesttask.exception.UserNotFoundException;
 import com.shvants.crudtesttask.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,7 +50,10 @@ public class UserServiceImpl implements UserService {
         userDAOService.addUser(transformUserToUserDAO(user));
     }
 
-    public void delete(int id) {
+    public void delete(int id) throws UserNotFoundException {
+        UserDAO userDAO = userDAOService.findUser(id);
+        if (userDAO != null)
         userDAOService.removeUser(id);
+        else throw new UserNotFoundException();
     }
 }
