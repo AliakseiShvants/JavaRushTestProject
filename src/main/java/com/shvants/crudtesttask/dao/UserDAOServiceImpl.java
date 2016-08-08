@@ -64,9 +64,12 @@ public class UserDAOServiceImpl implements UserDAOService{
         em.persist(userDAO);
     }
 
+    @Transactional
     public void updateUser(UserDAO userDAO) {
 
+
     }
+
     @Transactional
     public void removeUser(int id) {
        em.remove(findUser(id));

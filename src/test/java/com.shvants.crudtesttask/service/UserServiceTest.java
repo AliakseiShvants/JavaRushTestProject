@@ -7,9 +7,6 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-/**
- * Created by aliaksei on 14.7.16.
- */
 public class UserServiceTest {
    //@Ignore
    //@Test

@@ -19,22 +19,22 @@ import java.util.List;
 @Controller
 @RequestMapping("/user-module")
 public class UserController {
+
     @Autowired
     private UserService userService;
 
     @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
     public String getUsers( Model model){
-        //model.addAttribute("user", new User());
+
         model.addAttribute("userList", userService.getAllUsers());
 
-        return "userListDisplay";
+        return "startPage";
     }
 
     @RequestMapping(value = "/addNewUser", method = RequestMethod.POST)
-    public ModelAndView addNewUser(/*HttpServletRequest request,*/
-                                   @RequestParam(value = "name", required = true) String name,
-                                   @RequestParam(value = "age", required = true) String age,
-                                   @RequestParam(value = "admin", required = true) String admin){
+    public ModelAndView addNewUser(@RequestParam(value = "name") String name,
+                                   @RequestParam(value = "age") String age,
+                                   @RequestParam(value = "admin") String admin){
 
         if (name == null || age == null || admin == null || name.equals("")|| age.equals("") || admin.equals(""))
             throw new NullPointerException();
@@ -43,21 +43,25 @@ public class UserController {
         user.setName(name);
         user.setAge(Integer.parseInt(age));
         user.setAdmin(Boolean.valueOf(admin));
-
         userService.add(user);
 
-        return new ModelAndView("successAction", "message", "Новый пользователь успешно добавлен!");
+        return new ModelAndView("generalPage", "message", "Новый пользователь успешно добавлен!");
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
     public ModelAndView deleteUser(@RequestParam String id){
         try {
             userService.delete(Integer.parseInt(id));
-            return new ModelAndView("successAction", "message", "Пользователь c id=" + id + " успешно удален!");
+            return new ModelAndView("generalPage", "message", "Пользователь c id=" + id + " успешно удален!");
         }
         catch (UserNotFoundException e) {
-            return new ModelAndView("successAction", "message", ":( Не в наших силах удалить этого пользователя! Такого id просто не существует!");
+            return new ModelAndView("generalPage", "message", ":( Не в наших силах удалить этого пользователя! Такого id просто не существует!");
         }
     }
 
+    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+    public String updateUser(Model model, @RequestParam String id){
+        model.addAttribute("user");
+        return "updatePage";
+    }
 }

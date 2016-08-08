@@ -1,5 +1,4 @@
 package com.shvants.crudtesttask.model;
-import javax.persistence.*;
 import java.util.Date;
 
 public class User {
