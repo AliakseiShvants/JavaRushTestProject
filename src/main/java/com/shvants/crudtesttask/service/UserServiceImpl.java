@@ -56,4 +56,8 @@ public class UserServiceImpl implements UserService {
         userDAOService.removeUser(id);
         else throw new UserNotFoundException();
     }
+
+    public User getUser(int id) {
+        return transformUserDAOtoUser(userDAOService.findUser(id));
+    }
 }

@@ -53,13 +53,14 @@
         <td width=15% align=center>${user.createdDate}</td>
         <td width=1% height=1%>
             <form method="post" action="http://localhost:8080/crudtesttask/user-module/updateUser">
-                <button type="submit" >Править</button>
+            <input type="hidden" name="id" value="${user.id}">
+                <button type="submit" > Править </button>
             </form>
         </td>
         <td width=1% height=1%>
             <form method="post" action="http://localhost:8080/crudtesttask/user-module/deleteUser">
             <input type="hidden" name="id" value="${user.id}">
-                <button type="submit" >Удалить</button>
+                <button type="submit" > Удалить </button>
             </form>
         </td>
     </tr>

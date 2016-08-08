@@ -8,5 +8,4 @@ public interface UserDAOService {
     void removeUser(int id);
     List<UserDAO> getAllUsers();
     UserDAO findUser(int id);
-
 }

@@ -82,4 +82,5 @@ public class UserDAOServiceImpl implements UserDAOService{
     public UserDAO findUser(int id) {
         return em.find(UserDAO.class, id);
     }
+
 }

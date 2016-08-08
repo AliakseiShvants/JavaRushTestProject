@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.List;
 
 //import javax.servlet.http.HttpServletRequest;
@@ -60,8 +61,23 @@ public class UserController {
     }
 
     @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
-    public String updateUser(Model model, @RequestParam String id){
-        model.addAttribute("user");
-        return "updatePage";
+    public String updateUser(Model model,
+                             @RequestParam String id
+                             /*@RequestParam(value = "name") String name,
+                             @RequestParam(value = "age") String age,
+                             @RequestParam(value = "admin") String admin*/){
+
+
+            model.addAttribute("user", userService.getUser(Integer.parseInt(id)));
+            return "updatePage";
+
+
+
+//        User user = new User();
+//        user.setName(name);
+//        user.setAge(Integer.parseInt(age));
+//        user.setAdmin(Boolean.valueOf(admin));
+//        userService.add(user);
+//        return new ModelAndView("generalPage", "message", "Пользователь c id=" + id + " успешно сохранён!");
     }
 }
