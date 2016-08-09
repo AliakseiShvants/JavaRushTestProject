@@ -8,7 +8,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
     http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
-  <display-name>CRUD Application</display-name>
+  <display-name>CRUD Application by Alexej Shvants</display-name>
 
   <servlet>
     <servlet-name>spring</servlet-name>
