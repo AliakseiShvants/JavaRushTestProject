@@ -22,42 +22,44 @@
                 <td><input type="text" name="age" placeholder="возраст"></td>
                 <td><input type="text" name="admin" list="boolean"></td>
                 <datalist id="boolean">
-                               <option value="да">
-                               <option value="нет">
+                               <option value="true">
+                               <option value="false">
                 </datalist>
-                <td width=4%><input type="submit" value="Новый пользователь"></td>
+                <td><input type="submit" value="Новый пользователь"></td>
             </form>
             </tr>
             </table>
      <br>
      <br>
 
-<table  align=center width=44%  border=2>
+<table  align=center width=50%  border=2>
 
 <caption align=top>
              <h1>Наши пользователи</h1>
          </caption>
 
     <tr>
-        <th width=15% align=center>Фамилия и имя пользователя</th>
-        <th width=5% align=center>Возраст</th>
-        <th width=5 align=center>Является ли администратором</th>
-        <th width=15% align=center>Дата создания учетной записи</th>
+        <th align=center>Фамилия и имя пользователя</th>
+        <th  align=center>Возраст</th>
+        <th  align=center>Является ли администратором</th>
+        <th  align=center>Дата создания учетной записи</th>
     </tr>
 
     <c:forEach items="${userList}" var="user">
     <tr>
-        <td width=15% >${user.name}</td>
-        <td width=5% align=center>${user.age}</td>
-        <td width=5% align=center > <input type="checkbox" disabled checked> </td>
-        <td width=15% align=center>${user.createdDate}</td>
-        <td width=1% height=1%>
-            <form method="post" action="http://localhost:8080/crudtesttask/user-module/updateUser">
+        <td  >${user.name}</td>
+        <td  align=center>${user.age}</td>
+        <td align=center > <input type="checkbox" disabled checked> </td>
+        <td  align=center>${user.createdDate}</td>
+        <td  >
+
+            <form method="post" action="http://localhost:8080/crudtesttask/user-module/editUser">
             <input type="hidden" name="id" value="${user.id}">
                 <button type="submit" > Править </button>
             </form>
+
         </td>
-        <td width=1% height=1%>
+        <td >
             <form method="post" action="http://localhost:8080/crudtesttask/user-module/deleteUser">
             <input type="hidden" name="id" value="${user.id}">
                 <button type="submit" > Удалить </button>
@@ -66,6 +68,8 @@
     </tr>
     </c:forEach>
 </table>
+<%@ taglib prefix="r" uri="http://anydoby.com/simpletags" %>
+<r:pager page="${results}" pageParam="page"/>
 <br>
 <br>
 <br>

@@ -79,6 +79,7 @@ public class UserDAOServiceImpl implements UserDAOService{
         return em.createQuery("from UserDAO", UserDAO.class).getResultList();
     }
 
+
     public UserDAO findUser(int id) {
         return em.find(UserDAO.class, id);
     }

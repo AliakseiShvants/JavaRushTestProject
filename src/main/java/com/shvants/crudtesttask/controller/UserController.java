@@ -27,7 +27,8 @@ public class UserController {
     @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
     public String getUsers( Model model){
 
-        model.addAttribute("userList", userService.getAllUsers());
+
+        model.addAttribute("userList", userService.getAllUsers().subList(0,10));
 
         return "startPage";
     }
@@ -60,24 +61,28 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
-    public String updateUser(Model model,
-                             @RequestParam String id
-                             /*@RequestParam(value = "name") String name,
-                             @RequestParam(value = "age") String age,
-                             @RequestParam(value = "admin") String admin*/){
-
+    @RequestMapping(value = "/editUser", method = RequestMethod.POST)
+    public String editUser(Model model, @RequestParam String id){
 
             model.addAttribute("user", userService.getUser(Integer.parseInt(id)));
             return "updatePage";
+    }
 
+    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+    public ModelAndView updateUser(Model model,
+                             @RequestParam String id,
+                             @RequestParam(value = "name") String name,
+                             @RequestParam(value = "age") String age,
+                             @RequestParam(value = "admin") String admin) throws UserNotFoundException {
 
+        User user = new User();
+        user.setName(name);
+        user.setAge(Integer.parseInt(age));
+        user.setAdmin(Boolean.valueOf(admin));
+        userService.add(user);
 
-//        User user = new User();
-//        user.setName(name);
-//        user.setAge(Integer.parseInt(age));
-//        user.setAdmin(Boolean.valueOf(admin));
-//        userService.add(user);
-//        return new ModelAndView("generalPage", "message", "Пользователь c id=" + id + " успешно сохранён!");
+        userService.delete(Integer.parseInt(id));
+
+        return new ModelAndView("generalPage", "message", "Пользователь успешно сохранён!");
     }
 }
