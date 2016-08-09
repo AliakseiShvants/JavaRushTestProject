@@ -27,8 +27,7 @@ public class UserController {
     @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
     public String getUsers( Model model){
 
-
-        model.addAttribute("userList", userService.getAllUsers().subList(0,10));
+        model.addAttribute("userList", userService.getAllUsers());
 
         return "startPage";
     }

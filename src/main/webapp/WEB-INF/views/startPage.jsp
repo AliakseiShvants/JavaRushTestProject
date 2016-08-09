@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page pageEncoding="UTF-8"%>
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 
 <html>
 <head>
@@ -20,7 +20,7 @@
             <tr>
                 <td><input type="text" name="name" placeholder="фамилия и имя"></td>
                 <td><input type="text" name="age" placeholder="возраст"></td>
-                <td><input type="text" name="admin" list="boolean"></td>
+                <td><input type="text" name="admin" list="boolean" placeholder="админ?"></td>
                 <datalist id="boolean">
                                <option value="true">
                                <option value="false">
@@ -49,7 +49,7 @@
     <tr>
         <td  >${user.name}</td>
         <td  align=center>${user.age}</td>
-        <td align=center > <input type="checkbox" disabled checked> </td>
+        <td align=center > <input type="checkbox" <c:if test="${user.admin}">checked</c:if> > </td>
         <td  align=center>${user.createdDate}</td>
         <td  >
 
@@ -68,8 +68,9 @@
     </tr>
     </c:forEach>
 </table>
-<%@ taglib prefix="r" uri="http://anydoby.com/simpletags" %>
-<r:pager page="${results}" pageParam="page"/>
+<br>
+<!--%@ taglib prefix="r" uri="/WEB-INF/tags" %>-->
+<!--<r:pager page="${results}" pageParam="page"/>-->
 <br>
 <br>
 <br>
