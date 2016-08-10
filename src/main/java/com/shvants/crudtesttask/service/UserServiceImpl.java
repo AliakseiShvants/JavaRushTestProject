@@ -53,11 +53,24 @@ public class UserServiceImpl implements UserService {
     public void delete(int id) throws UserNotFoundException {
         UserDAO userDAO = userDAOService.findUser(id);
         if (userDAO != null)
-        userDAOService.removeUser(id);
+            userDAOService.removeUser(id);
         else throw new UserNotFoundException();
     }
 
     public User getUser(int id) {
         return transformUserDAOtoUser(userDAOService.findUser(id));
+    }
+
+    public void update(User user) throws UserNotFoundException {
+        UserDAO userDAO = userDAOService.findUser(user.getId());
+
+        if (userDAO != null){
+            userDAO.setName(user.getName());
+            userDAO.setAge(user.getAge());
+            userDAO.setAdmin(user.isAdmin());
+
+            userDAOService.updateUser(userDAO);
+        }
+        else throw new UserNotFoundException();
     }
 }

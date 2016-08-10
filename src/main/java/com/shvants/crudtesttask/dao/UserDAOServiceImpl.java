@@ -66,8 +66,7 @@ public class UserDAOServiceImpl implements UserDAOService{
 
     @Transactional
     public void updateUser(UserDAO userDAO) {
-
-
+        em.merge(userDAO);
     }
 
     @Transactional

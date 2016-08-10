@@ -16,6 +16,10 @@
      <br>
      <br>
      <table align=center width=30% border=2>
+     <caption align=top>
+                  <h2> Добавить нового пользователя </h2>
+              </caption>
+
             <form method="post" action="http://localhost:8080/crudtesttask/user-module/addNewUser" align=center>
             <tr>
                 <td><input type="text" name="name" placeholder="фамилия и имя"></td>
@@ -35,7 +39,7 @@
 <table  align=center width=50%  border=2>
 
 <caption align=top>
-             <h1>Наши пользователи</h1>
+             <h2>Наши пользователи</h2>
          </caption>
 
     <tr>
@@ -49,7 +53,7 @@
     <tr>
         <td  >${user.name}</td>
         <td  align=center>${user.age}</td>
-        <td align=center > <input type="checkbox" <c:if test="${user.admin}">checked</c:if> > </td>
+        <td align=center> <input type="checkbox" <c:if test="${user.admin}"> checked </c:if> > </td>
         <td  align=center>${user.createdDate}</td>
         <td  >
 

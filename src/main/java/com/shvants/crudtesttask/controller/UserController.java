@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 //import javax.servlet.http.HttpServletRequest;
@@ -75,12 +76,11 @@ public class UserController {
                              @RequestParam(value = "admin") String admin) throws UserNotFoundException {
 
         User user = new User();
+        user.setId(Integer.parseInt(id));
         user.setName(name);
         user.setAge(Integer.parseInt(age));
         user.setAdmin(Boolean.valueOf(admin));
-        userService.add(user);
-
-        userService.delete(Integer.parseInt(id));
+        userService.update(user);
 
         return new ModelAndView("generalPage", "message", "Пользователь успешно сохранён!");
     }
