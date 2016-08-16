@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
         user.setId(userDAO.getId());
         user.setName(userDAO.getName());
         user.setAge(userDAO.getAge());
-        user.setAdmin(userDAO.isAdmin());
+        user.setAdmin(userDAO.getAdmin());
         user.setCreatedDate(userDAO.getCreatedDate());
         return user;
     }
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
         userDAO.setId(user.getId());
         userDAO.setName(user.getName());
         userDAO.setAge(user.getAge());
-        userDAO.setAdmin(user.isAdmin());
+        userDAO.setAdmin(user.getAdmin());
         userDAO.setCreatedDate(user.getCreatedDate());
         return userDAO;
     }
@@ -67,10 +67,21 @@ public class UserServiceImpl implements UserService {
         if (userDAO != null){
             userDAO.setName(user.getName());
             userDAO.setAge(user.getAge());
-            userDAO.setAdmin(user.isAdmin());
+            userDAO.setAdmin(user.getAdmin());
 
             userDAOService.updateUser(userDAO);
         }
         else throw new UserNotFoundException();
+    }
+
+    public List<User> searchUsers(User user) {
+        List<User> result = new ArrayList<User>();
+        List<UserDAO> userDaoList = userDAOService.searchUsers(user);
+
+        for(UserDAO userDAO : userDaoList){
+            User usr = transformUserDAOtoUser(userDAO);
+            result.add(usr);
+        }
+        return result;
     }
 }

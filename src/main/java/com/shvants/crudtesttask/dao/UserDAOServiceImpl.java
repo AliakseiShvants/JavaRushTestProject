@@ -1,10 +1,15 @@
 package com.shvants.crudtesttask.dao;
 
+import com.shvants.crudtesttask.model.User;
+import org.hibernate.query.*;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class UserDAOServiceImpl implements UserDAOService{
@@ -83,4 +88,40 @@ public class UserDAOServiceImpl implements UserDAOService{
         return em.find(UserDAO.class, id);
     }
 
+    public List<UserDAO> searchUsers(User userCriteria) {
+        String queryWhere = "";
+        String queryString = "select u from UserDAO u ";
+        Map<String, Object> queryParameters = new HashMap<String, Object>();
+
+        if (userCriteria.getName() != null && !userCriteria.getName().equals("")) {
+            queryWhere = queryWhere.concat("u.name like :name ");
+            queryParameters.put("name", "%".concat(userCriteria.getName()).concat("%"));
+        }
+
+        if (userCriteria.getAge() != 0){
+            if (!queryWhere.equals(""))
+                queryWhere = queryWhere.concat("and ");
+            queryWhere = queryWhere.concat("u.age = :age ");
+            queryParameters.put("age", userCriteria.getAge());
+        }
+
+        if (userCriteria.getAdmin() != null){
+            if (!queryWhere.equals(""))
+                queryWhere = queryWhere.concat("and ");
+            queryWhere = queryWhere.concat("u.isAdmin = :admin");
+            queryParameters.put("admin", userCriteria.getAdmin());
+        }
+
+        if (!queryWhere.equals("")){
+            queryString = queryString.concat("where ").concat(queryWhere);
+        }
+
+        TypedQuery<UserDAO> query = em.createQuery(queryString, UserDAO.class);
+
+        for (Map.Entry<String, Object> entry : queryParameters.entrySet()){
+            query.setParameter(entry.getKey(), entry.getValue());
+        }
+
+        return query.getResultList();
+    }
 }

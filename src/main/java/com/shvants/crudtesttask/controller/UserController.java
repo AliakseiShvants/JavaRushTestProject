@@ -4,19 +4,12 @@ import com.shvants.crudtesttask.exception.UserNotFoundException;
 import com.shvants.crudtesttask.model.User;
 import com.shvants.crudtesttask.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.annotation.Resource;
-import java.io.IOException;
-import java.sql.Date;
-import java.util.List;
-
-//import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/user-module")
@@ -83,5 +76,27 @@ public class UserController {
         userService.update(user);
 
         return new ModelAndView("generalPage", "message", "Пользователь успешно сохранён!");
+    }
+    @RequestMapping(value = "/searchUser", method = RequestMethod.POST)
+    public String searchUser(Model model, HttpServletRequest request,
+                                   @RequestParam(value = "name") String name,
+                                   @RequestParam(value = "age") String age,
+                                   @RequestParam(value = "admin") String admin) throws UserNotFoundException {
+
+        User searchCriteria = new User();
+        if (name != null && !name.equals(""))
+        searchCriteria.setName(name);
+        if (age != null && !age.equals(""))
+            searchCriteria.setAge(Integer.parseInt(age));
+        if (admin != null && !admin.equals(""))
+            searchCriteria.setAdmin(Boolean.valueOf(admin));
+
+        HttpSession session = request.getSession();
+        //String username = (String)request.getAttribute("un");
+        session.setAttribute("searchCriteria", searchCriteria);
+
+        model.addAttribute("userList", userService.searchUsers(searchCriteria));
+
+        return "startPage";
     }
 }

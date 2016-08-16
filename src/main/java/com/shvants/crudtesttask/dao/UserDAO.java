@@ -19,7 +19,7 @@ public class UserDAO {
     @Column(name = "age")
     private int age;
     @Column(name = "isAdmin")
-    private boolean isAdmin;
+    private Boolean isAdmin;
     @Column(name= "createdDate")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date createdDate;
@@ -44,12 +44,15 @@ public class UserDAO {
     public void setAge(int age) {
         this.age = age;
     }
-    public boolean isAdmin() {
+
+    public Boolean getAdmin() {
         return isAdmin;
     }
-    public void setAdmin(boolean admin) {
+
+    public void setAdmin(Boolean admin) {
         isAdmin = admin;
     }
+
     public Date getCreatedDate() {
         return createdDate;
     }
@@ -59,7 +62,7 @@ public class UserDAO {
 
     @Override
     public String toString() {
-        return "".concat("User [id=").concat(String.valueOf(getId())).concat(", name=").concat(getName()).concat(", age=").concat(String.valueOf(getAge())).concat(", is admin=").concat(isAdmin() ? "yes" : "no").concat(String.valueOf(getCreatedDate())).concat("]");
+        return "".concat("User [id=").concat(String.valueOf(getId())).concat(", name=").concat(getName()).concat(", age=").concat(String.valueOf(getAge())).concat(", is admin=").concat(getAdmin() ? "yes" : "no").concat(String.valueOf(getCreatedDate())).concat("]");
     }
 
     public void getUsers(){}
