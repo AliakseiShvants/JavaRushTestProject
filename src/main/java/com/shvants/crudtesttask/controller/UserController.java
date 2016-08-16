@@ -2,6 +2,7 @@ package com.shvants.crudtesttask.controller;
 
 import com.shvants.crudtesttask.exception.UserNotFoundException;
 import com.shvants.crudtesttask.model.User;
+import com.shvants.crudtesttask.model.UserCriteria;
 import com.shvants.crudtesttask.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -84,16 +85,16 @@ public class UserController {
                                    @RequestParam(value = "admin") String admin) throws UserNotFoundException {
 
         User searchCriteria = new User();
+
         if (name != null && !name.equals(""))
-        searchCriteria.setName(name);
+            searchCriteria.setName(name);
         if (age != null && !age.equals(""))
             searchCriteria.setAge(Integer.parseInt(age));
         if (admin != null && !admin.equals(""))
             searchCriteria.setAdmin(Boolean.valueOf(admin));
 
         HttpSession session = request.getSession();
-        //String username = (String)request.getAttribute("un");
-        session.setAttribute("searchCriteria", searchCriteria);
+        session.setAttribute("searchCriteria", new UserCriteria(name, age, admin));
 
         model.addAttribute("userList", userService.searchUsers(searchCriteria));
 
