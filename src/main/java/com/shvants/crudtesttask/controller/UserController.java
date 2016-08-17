@@ -3,6 +3,7 @@ package com.shvants.crudtesttask.controller;
 import com.shvants.crudtesttask.exception.UserNotFoundException;
 import com.shvants.crudtesttask.model.User;
 import com.shvants.crudtesttask.model.UserCriteria;
+import com.shvants.crudtesttask.model.UserSearchCriteria;
 import com.shvants.crudtesttask.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,9 +21,26 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
-    public String getUsers( Model model){
+    public String getUsers(@RequestParam(defaultValue = "1") Integer page, Model model){
 
-        model.addAttribute("userList", userService.getAllUsers());
+        UserSearchCriteria userSearchCriteria = new  UserSearchCriteria();
+        Integer pageSize = 10;
+        Integer countUsers = userService.countUsers(userSearchCriteria);
+
+        Integer pageCount;
+        if (countUsers % 10 != 0)
+            pageCount = countUsers/10 + 1;
+        else pageCount = countUsers/10;
+
+        if (page == null || page < 0 || page > pageCount)
+            page = 1;
+
+        model.addAttribute("page", page);
+
+        userSearchCriteria.setCurrentPage(page);
+        userSearchCriteria.setPageSize(pageSize);
+        model.addAttribute("userList", userService.searchUsers(userSearchCriteria));
+        model.addAttribute("maxPages", pageCount);
 
         return "startPage";
     }
@@ -78,20 +96,38 @@ public class UserController {
 
         return new ModelAndView("generalPage", "message", "Пользователь успешно сохранён!");
     }
+
     @RequestMapping(value = "/searchUser", method = RequestMethod.POST)
-    public String searchUser(Model model, HttpServletRequest request,
+    public String searchUser(@RequestParam(defaultValue = "1") Integer page, Model model, HttpServletRequest request,
                                    @RequestParam(value = "name") String name,
                                    @RequestParam(value = "age") String age,
                                    @RequestParam(value = "admin") String admin) throws UserNotFoundException {
 
-        User searchCriteria = new User();
-
+        UserSearchCriteria searchCriteria = new UserSearchCriteria();
         if (name != null && !name.equals(""))
             searchCriteria.setName(name);
         if (age != null && !age.equals(""))
             searchCriteria.setAge(Integer.parseInt(age));
         if (admin != null && !admin.equals(""))
             searchCriteria.setAdmin(Boolean.valueOf(admin));
+
+        Integer pageSize = 10;
+        Integer countUsers = userService.countUsers(searchCriteria);
+
+        Integer pageCount;
+        if (countUsers % 10 != 0)
+            pageCount = countUsers/10 + 1;
+        else pageCount = countUsers/10;
+
+        if (page == null || page < 0 || page > pageCount)
+            page = 1;
+
+        model.addAttribute("page", page);
+
+        searchCriteria.setCurrentPage(page);
+        searchCriteria.setPageSize(pageSize);
+        model.addAttribute("userList", userService.searchUsers(searchCriteria));
+        model.addAttribute("maxPages", pageCount);
 
         HttpSession session = request.getSession();
         session.setAttribute("searchCriteria", new UserCriteria(name, age, admin));

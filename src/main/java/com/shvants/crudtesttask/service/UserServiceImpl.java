@@ -4,6 +4,7 @@ import com.shvants.crudtesttask.dao.UserDAO;
 import com.shvants.crudtesttask.dao.UserDAOService;
 import com.shvants.crudtesttask.exception.UserNotFoundException;
 import com.shvants.crudtesttask.model.User;
+import com.shvants.crudtesttask.model.UserSearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -74,7 +75,7 @@ public class UserServiceImpl implements UserService {
         else throw new UserNotFoundException();
     }
 
-    public List<User> searchUsers(User user) {
+    public List<User> searchUsers(UserSearchCriteria user) {
         List<User> result = new ArrayList<User>();
         List<UserDAO> userDaoList = userDAOService.searchUsers(user);
 
@@ -83,5 +84,9 @@ public class UserServiceImpl implements UserService {
             result.add(usr);
         }
         return result;
+    }
+
+    public Integer countUsers(UserSearchCriteria userSearchCriteria) {
+        return userDAOService.countUsers(userSearchCriteria);
     }
 }

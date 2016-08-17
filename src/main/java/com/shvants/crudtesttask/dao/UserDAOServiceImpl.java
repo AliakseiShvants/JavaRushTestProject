@@ -1,8 +1,6 @@
 package com.shvants.crudtesttask.dao;
 
-import com.shvants.crudtesttask.model.User;
-import org.hibernate.query.*;
-import org.hibernate.query.Query;
+import com.shvants.crudtesttask.model.UserSearchCriteria;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -88,7 +86,7 @@ public class UserDAOServiceImpl implements UserDAOService{
         return em.find(UserDAO.class, id);
     }
 
-    public List<UserDAO> searchUsers(User userCriteria) {
+    public List<UserDAO> searchUsers(UserSearchCriteria userCriteria) {
         String queryWhere = "";
         String queryString = "select u from UserDAO u ";
         Map<String, Object> queryParameters = new HashMap<String, Object>();
@@ -117,11 +115,54 @@ public class UserDAOServiceImpl implements UserDAOService{
         }
 
         TypedQuery<UserDAO> query = em.createQuery(queryString, UserDAO.class);
+        if (userCriteria.getCurrentPage() != null && userCriteria.getPageSize() != null) {
+            query.setFirstResult(10 * (userCriteria.getCurrentPage() - 1));
+            query.setMaxResults(userCriteria.getPageSize());
+        }
 
         for (Map.Entry<String, Object> entry : queryParameters.entrySet()){
             query.setParameter(entry.getKey(), entry.getValue());
         }
 
         return query.getResultList();
+    }
+
+    public Integer countUsers(UserSearchCriteria userCriteria) {
+
+        String queryWhere = "";
+        String queryString = "select count(u) from UserDAO u ";
+        Map<String, Object> queryParameters = new HashMap<String, Object>();
+
+        if (userCriteria.getName() != null && !userCriteria.getName().equals("")) {
+            queryWhere = queryWhere.concat("u.name like :name ");
+            queryParameters.put("name", "%".concat(userCriteria.getName()).concat("%"));
+        }
+
+        if (userCriteria.getAge() != 0){
+            if (!queryWhere.equals(""))
+                queryWhere = queryWhere.concat("and ");
+            queryWhere = queryWhere.concat("u.age = :age ");
+            queryParameters.put("age", userCriteria.getAge());
+        }
+
+        if (userCriteria.getAdmin() != null){
+            if (!queryWhere.equals(""))
+                queryWhere = queryWhere.concat("and ");
+            queryWhere = queryWhere.concat("u.isAdmin = :admin");
+            queryParameters.put("admin", userCriteria.getAdmin());
+        }
+
+        if (!queryWhere.equals("")){
+            queryString = queryString.concat("where ").concat(queryWhere);
+        }
+
+        TypedQuery<Long> query = em.createQuery(queryString, Long.class);
+
+        for (Map.Entry<String, Object> entry : queryParameters.entrySet()){
+            query.setParameter(entry.getKey(), entry.getValue());
+        }
+
+        return query.getSingleResult().intValue();
+
     }
 }

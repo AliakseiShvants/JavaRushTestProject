@@ -7,12 +7,7 @@
     <title> Spring MVC CrudTestTask </title>
 </head>
 <body bgcolor=white>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
+
      <table align=center>
 
         <caption align=top>
@@ -31,8 +26,6 @@
                 </tr>
             </form>
      </table>
-     <br>
-     <br>
 
     <table  align=center width=50%  border=1>
 
@@ -91,11 +84,42 @@
         </c:forEach>
     </table>
     <br>
-    <!--%@ taglib prefix="r" uri="/WEB-INF/tags" %>-->
-    <!--<r:pager page="${results}" pageParam="page"/>-->
-    <br>
-    <br>
-    <br>
+   <table id="pagination" align=center>
+     <tr>
+       <c:url value="/user-module/searchUsers" var="prev">
+           <c:param name="page" value="${page-1}"/>
+       </c:url>
+       <c:if test="${page > 1}">
+           <td> <a href="<c:out value="${prev}" />" class="pn prev">Предыдущая</a>  </td>
+       </c:if>
+       <c:forEach begin="1" end="${maxPages}" step="1" varStatus="i">
+               <c:choose>
+                   <c:when test="${page == i.index}">
+                       <td><span>${i.index}</span></td>
+                   </c:when>
+                   <c:otherwise>
+                       <c:url value="/user-module/searchUser" var="url">
+                       </c:url>
+                       <form method="post" action="${url}" align=center>
+                           <td>
+                               <input type="hidden" name="name" value="${sessionScope.searchCriteria.name}">
+                               <input type="hidden" name="age" value="${sessionScope.searchCriteria.age}">
+                               <input type="hidden" name="admin" value="${sessionScope.searchCriteria.admin}">
+                               <input type="hidden" name="page" value="${i.index}">
+                               <input type="submit" value="${i.index}">
+                           </td>
+                       </form>
+                   </c:otherwise>
+               </c:choose>
+       </c:forEach>
+       <c:url value="/user-module/searchUsers" var="next">
+           <c:param name="page" value="${page + 1}"/>
+       </c:url>
+       <c:if test="${page + 1 <= maxPages}">
+           <td> <a href='<c:out value="${next}" />' class="pn next">Следующая</a>   </td>
+       </c:if>
+     </tr>
+   </table>
 
 </body>
 </html>

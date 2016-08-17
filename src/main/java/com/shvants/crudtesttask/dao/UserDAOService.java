@@ -1,6 +1,7 @@
 package com.shvants.crudtesttask.dao;
 
 import com.shvants.crudtesttask.model.User;
+import com.shvants.crudtesttask.model.UserSearchCriteria;
 
 import java.util.List;
 
@@ -10,5 +11,6 @@ public interface UserDAOService {
     void removeUser(int id);
     List<UserDAO> getAllUsers();
     UserDAO findUser(int id);
-    List<UserDAO> searchUsers(User userCriteria);
+    List<UserDAO> searchUsers(UserSearchCriteria userCriteria);
+    Integer countUsers(UserSearchCriteria userCriteria);
 }
