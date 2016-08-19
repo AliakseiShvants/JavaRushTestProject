@@ -19,7 +19,7 @@
             <th  align=center> админ? </th>
    </tr>
 
-   <form method="post" action="http://localhost:8080/crudtesttask/user-module/updateUser" align=center>
+   <form method="post" action="../user-module/updateUser" align=center>
        <tr>
             <td><input type="text" name="name" value="${user.name}"></td>
             <td><input type="text" name="age" value="${user.age}"></td>
@@ -35,7 +35,7 @@
    </table>
 
    <br>
-   <a href="http://localhost:8080/crudtesttask/user-module/getUsers">
+   <a href="../user-module/getUsers">
     <h3 align=center>Вернуться к списку пользователей</h3>
    </a>
    </body>

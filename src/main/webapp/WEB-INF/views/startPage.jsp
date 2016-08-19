@@ -14,7 +14,7 @@
             <h2> Добавить нового пользователя </h2>
         </caption>
 
-            <form method="post" action="http://localhost:8080/crudtesttask/user-module/addNewUser" align=center>
+            <form method="post" action="../user-module/addNewUser" align=center>
                 <tr>
                     <td><input type="text" name="name" placeholder="фамилия и имя"></td>
                     <td><input type="text" name="age" placeholder="возраст"></td>
@@ -42,7 +42,7 @@
             <th  align=center></th>
         </tr>
 
-        <form method="post" action="http://localhost:8080/crudtesttask/user-module/searchUser" align=center>
+        <form method="post" action="../user-module/searchUser" align=center>
             <c:set var="searchCriteria" value="${searchCriteria}" scope="session"  />
             <tr>
                 <td align=center><input type="text" name="name" value="${sessionScope.searchCriteria.name}" placeholder="фамилия и имя"></td>
@@ -69,13 +69,13 @@
             <td align=center>${user.createdDate}</td>
             <td align=center>
 
-                <form method="post" action="http://localhost:8080/crudtesttask/user-module/editUser">
+                <form method="post" action="../user-module/editUser">
                     <input type="hidden" name="id" value="${user.id}">
                     <button type="submit" > Править </button>
                 </form>
             </td>
             <td align=center>
-                <form method="post" action="http://localhost:8080/crudtesttask/user-module/deleteUser">
+                <form method="post" action="../user-module/deleteUser">
                     <input type="hidden" name="id" value="${user.id}">
                     <button type="submit" > Удалить </button>
                 </form>
