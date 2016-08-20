@@ -99,9 +99,9 @@ public class UserController {
 
     @RequestMapping(value = "/searchUser", method = RequestMethod.POST)
     public String searchUser(@RequestParam(defaultValue = "1") Integer page, Model model, HttpServletRequest request,
-                                   @RequestParam(value = "name") String name,
-                                   @RequestParam(value = "age") String age,
-                                   @RequestParam(value = "admin") String admin) throws UserNotFoundException {
+                                   @RequestParam(defaultValue = "", value = "name") String name,
+                                   @RequestParam(defaultValue = "", value = "age") String age,
+                                   @RequestParam(defaultValue = "", value = "admin") String admin) throws UserNotFoundException {
 
         UserSearchCriteria searchCriteria = new UserSearchCriteria();
         if (name != null && !name.equals(""))

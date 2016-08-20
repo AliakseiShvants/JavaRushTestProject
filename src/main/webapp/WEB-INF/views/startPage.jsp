@@ -84,14 +84,20 @@
         </c:forEach>
     </table>
     <br>
+                            <!--paging-->
    <table id="pagination" align=center>
      <tr>
-       <c:url value="/user-module/searchUsers" var="prev">
-           <c:param name="page" value="${page-1}"/>
+       <c:url value="/user-module/searchUser" var="prev">
        </c:url>
        <c:if test="${page > 1}">
-           <td> <a href="<c:out value="${prev}" />" class="pn prev">Предыдущая</a>  </td>
+           <form method="post" action="${prev}" align=center>
+                <td>
+                    <input type="hidden" name="page" value="${page - 1}">
+                    <input type="submit" value="Предыдущая">
+                </td>
+           </form>
        </c:if>
+
        <c:forEach begin="1" end="${maxPages}" step="1" varStatus="i">
                <c:choose>
                    <c:when test="${page == i.index}">
@@ -112,11 +118,15 @@
                    </c:otherwise>
                </c:choose>
        </c:forEach>
-       <c:url value="/user-module/searchUsers" var="next">
-           <c:param name="page" value="${page + 1}"/>
+       <c:url value="/user-module/searchUser" var="next">
        </c:url>
        <c:if test="${page + 1 <= maxPages}">
-           <td> <a href='<c:out value="${next}" />' class="pn next">Следующая</a>   </td>
+           <form method="post" action="${next}" align=center>
+                <td>
+                    <input type="hidden" name="page" value="${page + 1}">
+                    <input type="submit" value="Cледующая">
+                </td>
+           </form>
        </c:if>
      </tr>
    </table>
