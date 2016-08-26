@@ -42,7 +42,7 @@ public class UserDAOServiceImpl implements UserDAOService{
     public List<UserDAO> searchUsers(UserSearchCriteria userCriteria) {
 
         String queryStringBegin = "select u from UserDAO u ";
-        ResponseClass response = new ResponseClass(queryStringBegin);
+        QueryBuilder response = new QueryBuilder(queryStringBegin);
         String queryString = response.getQueryString(userCriteria);
 
 
@@ -62,7 +62,7 @@ public class UserDAOServiceImpl implements UserDAOService{
     public Integer countUsers(UserSearchCriteria userCriteria) {
 
         String queryStringBegin = "select count(u) from UserDAO u ";
-        ResponseClass response = new ResponseClass(queryStringBegin);
+        QueryBuilder response = new QueryBuilder(queryStringBegin);
         String queryString = response.getQueryString(userCriteria);
 
         TypedQuery<Long> query = em.createQuery(queryString, Long.class);
@@ -70,17 +70,18 @@ public class UserDAOServiceImpl implements UserDAOService{
         return query.getSingleResult().intValue();
     }
 
-    public class ResponseClass{
+    public class QueryBuilder{
 
-        String queryWhere = "";
-        String queryString = "";
+        private String queryString = "";
         Map<String, Object> queryParameters = new HashMap<String, Object>();
 
-        public ResponseClass(String queryStringBegin) {
+        public QueryBuilder(String queryStringBegin) {
             this.queryString = queryStringBegin;
         }
 
-        private String getQueryString(UserSearchCriteria userCriteria) {
+        public String getQueryString(UserSearchCriteria userCriteria) {
+
+            String queryWhere = "";
 
             if (userCriteria.getName() != null && !userCriteria.getName().equals("")) {
                 queryWhere = queryWhere.concat("u.name like :name ");

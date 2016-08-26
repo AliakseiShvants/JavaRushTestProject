@@ -51,15 +51,15 @@ public class UserController {
                                    @RequestParam(value = "admin") String admin){
 
         if (name == null || age == null || admin == null || name.equals("")|| age.equals("") || admin.equals(""))
-            throw new NullPointerException();
+            return new ModelAndView("generalPage", "message", "Для добавления нового пользователя ВСЕ поля обязательны для заполнения!");
 
-        User user = new User();
-        user.setName(name);
-        user.setAge(Integer.parseInt(age));
-        user.setAdmin(Boolean.valueOf(admin));
-        userService.add(user);
+            User user = new User();
+            user.setName(name);
+            user.setAge(Integer.parseInt(age));
+            user.setAdmin(Boolean.valueOf(admin));
+            userService.add(user);
 
-        return new ModelAndView("generalPage", "message", "Новый пользователь успешно добавлен!");
+            return new ModelAndView("generalPage", "message", "Новый пользователь успешно добавлен!");
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)

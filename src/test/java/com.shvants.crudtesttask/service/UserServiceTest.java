@@ -8,21 +8,21 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 public class UserServiceTest {
-   //@Ignore
-   //@Test
-//    public void testGetUser(){
-//
-//        UserDAOServiceImpl testUserService = new UserDAOServiceImpl();
-//
-//        int count = testUserService.getAllUsers().size();
-//        Assert.assertEquals(count, 5);
-//
-//        for (UserDAO user : testUserService.getAllUsers(){
-//            Assert.assertNotNull(user.getId());
-//            Assert.assertNotNull(user.getName());
-//            Assert.assertNotNull(user.getAge());
-//            Assert.assertNotNull(user.isAdmin());
-//            Assert.assertNotNull(user.getCreatedDate());
-//        }
-//    }
+   @Ignore
+   @Test
+    public void testGetUser(){
+
+        UserDAOServiceImpl testUserService = new UserDAOServiceImpl();
+
+        int count = testUserService.getAllUsers().size();
+        Assert.assertEquals(count, 5);
+
+        for (UserDAO user : testUserService.getAllUsers()){
+            Assert.assertNotNull(user.getId());
+            Assert.assertNotNull(user.getName());
+            Assert.assertNotNull(user.getAge());
+            Assert.assertNotNull(user.getAdmin());
+            Assert.assertNotNull(user.getCreatedDate());
+        }
+    }
 }
