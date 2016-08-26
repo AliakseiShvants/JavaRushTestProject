@@ -22,7 +22,7 @@
    <form method="post" action="../user-module/updateUser" align=center>
        <tr>
             <td><input type="text" name="name" value="${user.name}"></td>
-            <td><input type="text" name="age" value="${user.age}"></td>
+            <td><input type="text" name="age" value="${user.age}" pattern="[0-9]{1,3}"></td>
             <td align=center>
                 <input type="radio" name="admin" value="true" <c:if test="${user.admin}"> checked </c:if> > да
                 <input type="radio" name="admin" value="false" <c:if test="${!user.admin}"> checked </c:if> > нет

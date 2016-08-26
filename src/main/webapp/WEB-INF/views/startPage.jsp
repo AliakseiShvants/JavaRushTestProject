@@ -16,8 +16,8 @@
 
             <form method="post" action="../user-module/addNewUser" align=center>
                 <tr>
-                    <td><input type="text" name="name" placeholder="фамилия и имя"></td>
-                    <td><input type="text" name="age" placeholder="возраст"></td>
+                    <td><input type="text" name="name" placeholder="фамилия и имя" required></td>
+                    <td><input type="text" name="age" placeholder="возраст" required pattern="[0-9]{1,3}"></td>
                     <td align=center>
                             <input type="radio" name="admin" value="true"> да
                             <input type="radio" name="admin" value="false" checked> нет

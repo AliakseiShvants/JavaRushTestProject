@@ -50,9 +50,6 @@ public class UserController {
                                    @RequestParam(value = "age") String age,
                                    @RequestParam(value = "admin") String admin){
 
-        if ( name == null || age == null || admin == null || name.equals("")|| age.equals("") || admin.equals("") )
-            return new ModelAndView("generalPage", "message", "Для добавления нового пользователя ВСЕ поля обязательны для заполнения!");
-
             User user = new User();
             user.setName(name);
 
@@ -97,7 +94,9 @@ public class UserController {
         User user = new User();
         user.setId(Integer.parseInt(id));
         user.setName(name);
+
         user.setAge(Integer.parseInt(age));
+
         user.setAdmin(Boolean.valueOf(admin));
         userService.update(user);
 
