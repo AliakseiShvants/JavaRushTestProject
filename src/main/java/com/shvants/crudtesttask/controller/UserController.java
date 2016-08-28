@@ -52,14 +52,12 @@ public class UserController {
 
             User user = new User();
             user.setName(name);
-
             try {
                 user.setAge(Integer.parseInt(age));
             }
             catch (NumberFormatException e){
                 return new ModelAndView("generalPage", "message", "Возраст должен быть целым числом!");
             }
-
             user.setAdmin(Boolean.valueOf(admin));
             userService.add(user);
 

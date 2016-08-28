@@ -2,11 +2,7 @@ package com.shvants.crudtesttask.dao;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
-/**
- * Created by aliaksei on 3.8.16.
- */
 @Entity
 @Table(name  = "User")
 public class UserDAO {

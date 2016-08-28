@@ -46,7 +46,7 @@
             <c:set var="searchCriteria" value="${searchCriteria}" scope="session"  />
             <tr>
                 <td align=center><input type="text" name="name" value="${sessionScope.searchCriteria.name}" placeholder="фамилия и имя"></td>
-                <td align=center><input type="text" name="age" value="${sessionScope.searchCriteria.age}" placeholder="возраст"></td>
+                <td align=center><input type="text" name="age" value="${sessionScope.searchCriteria.age}" placeholder="возраст" pattern="[0-9]{1,3}"></td>
                 <td align=center>
                     <select name="admin">
                         <option <c:if test="${sessionScope.searchCriteria.admin ==''}"> selected </c:if> value="">Не выбран</option>

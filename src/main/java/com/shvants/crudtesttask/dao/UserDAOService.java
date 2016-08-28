@@ -1,8 +1,6 @@
 package com.shvants.crudtesttask.dao;
 
-import com.shvants.crudtesttask.model.User;
 import com.shvants.crudtesttask.model.UserSearchCriteria;
-
 import java.util.List;
 
 public interface UserDAOService {

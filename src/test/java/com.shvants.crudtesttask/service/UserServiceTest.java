@@ -2,7 +2,6 @@ package com.shvants.crudtesttask.service;
 
 import com.shvants.crudtesttask.dao.UserDAO;
 import com.shvants.crudtesttask.dao.UserDAOServiceImpl;
-import com.shvants.crudtesttask.model.User;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;

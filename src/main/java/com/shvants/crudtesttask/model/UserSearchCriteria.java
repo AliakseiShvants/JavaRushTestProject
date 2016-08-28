@@ -1,5 +1,4 @@
 package com.shvants.crudtesttask.model;
-import java.util.Date;
 
 public class UserSearchCriteria extends PageCriteria{
 
